@@ -10,7 +10,7 @@
 | Component not visible to BRP | Type lacks `Reflect` + `#[reflect(Component)]`. |
 | Mutation rejected / wrong JSON | `brp_type_guide` for exact paths and value shapes (e.g. `.translation.y`, Vec3 as `[x,y,z]`). |
 | Screenshot black | Window minimized/occluded, or captured before first render. Keep window visible; wait for frames. |
-| Screenshot fails "png" | Bevy `png` feature missing (template `dev` enables it). |
+| Screenshot fails "png" | Bevy `png` feature missing (skeleton `dev` feature enables it). |
 | Keys not received | App code reads `ButtonInput<KeyCode>`: injected keys work. Use `KeyCode` names (`KeyA`, `ArrowUp`, `Space`). Hold long enough (`duration_ms` ≥ 100) for systems gated on `FixedUpdate`. |
 | Mouse position off | Tool coordinates are logical px; screenshots are physical px (multiply by scale factor). |
 | `bevy-feedback run` times out | Increase `--prepare-timeout` (first Bevy build is slow); confirm `--features agent-feedback`. |
@@ -18,4 +18,4 @@
 | Skills not offered | `ls ~/.claude/skills`; reinstall via `npx skills add ... -g -a claude-code --copy`; restart session. |
 | First build very slow | Normal (~5–10 min clean). Subsequent incremental builds are fast; shared `CARGO_TARGET_DIR` across projects is optional. |
 | First `--features agent-feedback` build rebuilds all of Bevy | The plugin enables extra Bevy (`keyboard`, `mouse`) and `log` max-level features, changing the feature hash. One-time cost; Cargo keeps both artifact sets, so toggling afterwards is fast. |
-| Screenshot size ≠ 1280x720 | Display scaling. Template sets `with_scale_factor_override(1.0)`; remove it if you want native DPI and convert coordinates by scale factor. |
+| Screenshot size ≠ 1280x720 | Display scaling. Skeleton sets `with_scale_factor_override(1.0)`; remove it if you want native DPI and convert coordinates by scale factor. |

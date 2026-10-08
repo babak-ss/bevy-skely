@@ -14,7 +14,7 @@ nothing is project-specific. Reference host: Windows 11, Claude Code.
 | Python 3 | already present | driver scripts for `bevy-feedback` |
 | Linux only | `sudo apt install g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0 libwayland-dev` | see Bevy `docs/linux_dependencies.md` |
 
-No global `~/.cargo/config.toml` changes. Build-speed settings live per project (template `Cargo.toml`).
+No global `~/.cargo/config.toml` changes. Build-speed settings live per project (skeleton `Cargo.toml`).
 
 ## 2. Bevy skills (user scope)
 

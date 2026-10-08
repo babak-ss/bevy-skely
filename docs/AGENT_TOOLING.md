@@ -41,7 +41,7 @@ determinism matters.
 6. Edit → rebuild → `brp_shutdown` + relaunch → capture again.
 
 Keep the window visible: a minimized/occluded window can yield black captures on some platforms.
-Input coordinates are logical window pixels; PNGs are physical pixels. Template forces scale
+Input coordinates are logical window pixels; PNGs are physical pixels. Skeleton forces scale
 factor 1.0, so both are 1280x720.
 
 ## Scripted run with bevy-feedback
@@ -54,7 +54,7 @@ bevy-feedback run --require-window-size 1280x720 \
   --driver python driver.py
 ```
 Driver API and readiness rules: skill `driving-bevy-games`. Set `BEVY_FEEDBACK_REALTIME=1` to
-disable frozen time (template reads it).
+disable frozen time (`src/dev/mod.rs` reads it).
 
 ## In-process tests (no window)
 

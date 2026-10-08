@@ -3,19 +3,24 @@
 ## Fast path
 
 ```powershell
-pwsh <kit>/scripts/new-bevy-project.ps1 -Path ~/WS/my_game
-# bash: <kit>/scripts/new-bevy-project.sh ~/WS/my_game
+git clone <skeleton-url-or-path> my_game
+cd my_game
+pwsh scripts/setup.ps1            # bash: scripts/setup.sh
 ```
-Copies `template/`, renames the crate, `git init`, `cargo fmt`, `cargo check`, first commit.
+Renames crate `bevy_skeleton` → folder name (`-Name x` to override), removes
+`tools/brp_smoke`, writes a project README, deletes the setup scripts, starts fresh git history
+(`-KeepHistory` to keep the skeleton's), commits, then `cargo fmt` + `cargo check`
+(`-SkipBuild` to defer). Then add your own remote: `git remote add origin <url>`.
 First build of Bevy takes several minutes; later builds are incremental.
 
 Alternative: `bevy new my_game` (Bevy CLI; uses TheBevyFlock templates) then copy
-`AGENTS.md`, `CLAUDE.md`, `src/dev/` and the `[features]` block from this kit.
+`AGENTS.md`, `CLAUDE.md`, `src/dev/` and the `[features]` block from this skeleton.
 
-## What the template contains
+## What the skeleton contains
 
 ```
 Cargo.toml        bevy 0.19.1; features dev / agent-feedback / fast-compile; dev profiles
+Cargo.lock        pinned, verified dependency versions
 AGENTS.md         agent rules (Bevy skills, iteration loop, tooling map, verification levels)
 CLAUDE.md         "@AGENTS.md" so Claude Code loads the same rules
 src/main.rs       App, DefaultPlugins (1280x720 window), AppPlugin, DevPlugin (cfg dev)
@@ -60,7 +65,7 @@ Minimum without extras (inspection/mutation only, no screenshots/input):
 
 ## Optional per-project build speed
 
-- Already in template: `[profile.dev] opt-level = 1`, deps at `opt-level = 3`.
+- Already in skeleton: `[profile.dev] opt-level = 1`, deps at `opt-level = 3`.
 - Linker (Windows MSVC), in `<project>/.cargo/config.toml`:
   ```toml
   [target.x86_64-pc-windows-msvc]
