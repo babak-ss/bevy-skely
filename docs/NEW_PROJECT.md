@@ -3,7 +3,7 @@
 ## Fast path
 
 ```powershell
-git clone <skeleton-url-or-path> my_game
+git clone https://github.com/babak-ss/bevy-skely my_game
 cd my_game
 pwsh scripts/setup.ps1            # bash: scripts/setup.sh
 ```

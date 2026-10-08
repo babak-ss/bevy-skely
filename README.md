@@ -7,7 +7,7 @@ Starting point for new Bevy 0.19 projects with agent tooling wired in: BRP + `be
 ## New project
 
 ```powershell
-git clone <this-repo> my_game
+git clone https://github.com/babak-ss/bevy-skely my_game
 cd my_game
 pwsh scripts/setup.ps1        # bash: scripts/setup.sh
 cargo run
