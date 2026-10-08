@@ -1,0 +1,33 @@
+[package]
+name = "brp_smoke"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+bevy = "0.19.1"
+
+# Dev-only agent tooling. Optional so release builds never link it.
+bevy_brp_extras = { version = "0.22.10", optional = true }
+bevy-agent-feedback-plugin = { version = "0.5", optional = true, features = ["diagnostics"] }
+
+[features]
+default = ["dev"]
+# BRP server (port 15702) + screenshot/input/diagnostics methods for bevy_brp_mcp.
+dev = ["dep:bevy_brp_extras", "bevy/bevy_remote", "bevy/png"]
+# Scripted driver protocol (bevy-feedback CLI): deterministic time, frame waits, PNG captures.
+agent-feedback = ["dev", "dep:bevy-agent-feedback-plugin"]
+# Faster incremental builds. Use with `cargo run`, not with brp_launch (needs bevy_dylib on PATH).
+fast-compile = ["bevy/dynamic_linking"]
+
+# Release: cargo build --release --no-default-features
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
