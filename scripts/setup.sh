@@ -39,7 +39,11 @@ if command -v claude >/dev/null; then
 fi
 
 sed -i.bak "s/name = \"bevy_skeleton\"/name = \"$crate\"/" Cargo.toml && rm Cargo.toml.bak
-[ -f Cargo.lock ] && sed -i.bak "s/name = \"bevy_skeleton\"/name = \"$crate\"/" Cargo.lock && rm Cargo.lock.bak
+if [ -f Cargo.lock ]; then
+    sed -i.bak "s/name = \"bevy_skeleton\"/name = \"$crate\"/" Cargo.lock && rm Cargo.lock.bak
+    # Re-sort the renamed entry; dependency pins stay unchanged.
+    cargo update --workspace --offline >/dev/null 2>&1 || cargo update --workspace
+fi
 
 [ "$keep_smoke" = 1 ] || rm -rf tools/brp_smoke
 rmdir tools 2>/dev/null || true

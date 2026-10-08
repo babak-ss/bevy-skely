@@ -49,6 +49,9 @@ if (Get-Command claude -ErrorAction SilentlyContinue) {
 $lock = Join-Path $root 'Cargo.lock'
 if (Test-Path $lock) {
     (Get-Content $lock -Raw) -replace 'name = "bevy_skeleton"', "name = `"$crate`"" | Set-Content $lock -NoNewline
+    # Re-sort the renamed entry; dependency pins stay unchanged.
+    cargo update --workspace --offline *> $null
+    if ($LASTEXITCODE -ne 0) { cargo update --workspace }
 }
 
 if (-not $KeepSmoke) { Remove-Item tools/brp_smoke -Recurse -Force -ErrorAction SilentlyContinue }
